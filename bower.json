@@ -1,0 +1,26 @@
+{
+  "name": "wd-prototype",
+  "homepage": "http://workday.github.io//",
+  "authors": [
+    "Workday, Inc."
+  ],
+  "description": "WD Prototype for Juxt",
+  "main": "src/main.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "animation",
+    "html5",
+    "css3",
+    "transition"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

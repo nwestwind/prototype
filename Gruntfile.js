@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 					cssDir: '<%= dir.prod %>/css',
 					noLineComments: true,
 					outputStyle: 'compressed',
-					force: true,
+					force: false,
 					bundleExec: false,
 					httpImagesPath: 'img',
 					imagesDir: 'img',
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
 			},
 			compass: {
 				files: ['**/*.scss'],
-				tasks: ['compass:stage', 'compass,prod']
+				tasks: ['compass:stage', 'compass:prod']
 			},
 			js: {
 				files: ['src/js/**/*.js'],
@@ -131,7 +131,7 @@ module.exports = function(grunt) {
 			},
 			options: {
 				 dateFormat: function(time) {
-			      grunt.log.writeln(time + 'ms at ' + (new Date()).toString());
+			      grunt.log.writeln('It took ' + time + 'ms at ' + (new Date()).toString());
 			      grunt.log.writeln('Waiting for more changes...');
 			    },
 			}
@@ -142,6 +142,7 @@ module.exports = function(grunt) {
 				bundleExec: false,
 				colorizeOutput: true,
 				config: '.scss-lint.yml',
+				exclude: 'node_modules/',
 				  // maxBuffer: 1024 * 1024,
 				  force: true
 			},
@@ -161,6 +162,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-scss-lint');
 	grunt.loadNpmTasks('grunt-timer');
 	//tasks
-	grunt.registerTask('build', ['clean:prod', 'copy:prod', 'copy:stage', 'clean:stage', 'compass:stage', 'compass:prod', 'concat:js', 'uglify:js', 'includes']);
+	grunt.registerTask('build', ['scsslint', 'clean:prod', 'clean:stage', 'copy:prod', 'copy:stage', 'compass:stage', 'compass:prod', 'concat:js', 'uglify:js', 'includes']);
 	grunt.registerTask('default', ['watch']);
 };

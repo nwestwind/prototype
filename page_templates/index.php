@@ -1,3 +1,5 @@
-@include 'head';
+include "head.php"
 
-@include 'footer';
+include "components/hero.php"
+
+include "footer.php"

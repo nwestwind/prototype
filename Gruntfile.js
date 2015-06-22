@@ -15,10 +15,22 @@ module.exports = function(grunt) {
 
 		//deletes contents of directory
 		clean: {
-  			prod: ["<%= dir.prod %>/**/*.js", "<%= dir.prod %>/**/*.css", "<%= dir.prod %>/**/*.jpg", "<%= dir.prod %>/**/*.html", "<%= dir.prod %>/**/*.gif", "<%= dir.prod %>/**/*.png"],
-  			stage: ["<%= dir.stage %>/**/*.js", "<%= dir.stage %>/**/*.css", "<%= dir.stage %>/**/*.jpg", "<%= dir.stage %>/**/*.html", "<%= dir.stage %>/**/*.gif", "<%= dir.stage %>/**/*.png"]
+  			prod: ["<%= dir.prod %>/**/*.js", "<%= dir.prod %>/**/*.css", "<%= dir.prod %>/**/*.jpg", "<%= dir.prod %>/**/*.html", "<%= dir.prod %>/**/*.php", "<%= dir.prod %>/**/*.gif", "<%= dir.prod %>/**/*.png"],
+  			stage: ["<%= dir.stage %>/**/*.js", "<%= dir.stage %>/**/*.css", "<%= dir.stage %>/**/*.jpg", "<%= dir.stage %>/**/*.html", "<%= dir.stage %>/**/*.php", "<%= dir.stage %>/**/*.gif", "<%= dir.stage %>/**/*.png"]
 		},
-
+		//copies files to another folder
+		copy: {
+			stage: {
+				files: [
+			    	{expand: true, src: ['img/**'], dest: '<%= dir.stage %>/'}
+			    ],
+			},
+			prod: {
+				files: [
+			    	{expand: true, src: ['img/**'], dest: '<%= dir.prod %>/'}
+			    ],
+			}
+		},
 		//compiles scss to css
 		compass: {
 			stage: {
@@ -28,11 +40,11 @@ module.exports = function(grunt) {
 					noLineComments: false,
 					outputStyle: 'nested',
 					force: true,
-					bundleExec: true,
+					bundleExec: false,
 					httpImagesPath: 'img',
-					// imagesDir: 'images-stage.workday.com',
+					imagesDir: 'img/',
 					// fontsDir: 'assets-stage.workday.com',
-					// httpPath: '//s3-us-west-2.amazonaws.com'
+					httpPath: 'localhost/prototype'
 					// httpFontsPath: '//assets.workday.com/fonts'
 				}
 		  	},
@@ -43,16 +55,16 @@ module.exports = function(grunt) {
 					noLineComments: true,
 					outputStyle: 'compressed',
 					force: true,
-					bundleExec: true,
+					bundleExec: false,
 					httpImagesPath: 'img',
-					// imagesDir: 'images-stage.workday.com',
+					imagesDir: 'img',
 					// fontsDir: 'assets-stage.workday.com',
-					// httpPath: '//s3-us-west-2.amazonaws.com'
+					httpPath: '//thewestwindproject.com'
 					// httpFontsPath: '//assets.workday.com/fonts'
 				}
 		  	}		  	
 		},
-
+		
 		//concatenates multiple files into one
 		concat: {
 			js: {
@@ -61,8 +73,8 @@ module.exports = function(grunt) {
 					separator: ';',
 				},
 				files: {
-					'<%= dir.stage %>/js/prototype-head.js': ['js/vendor/modernizr.js'],
-					'<%= dir.stage %>/js/prototype-global.js': ['js/vendor/jquery-2.1.4.min.js', 'js/vendor/jquery-waypoints-3.1.1.js', 'js/prototype-global.js', 'js/components/*.js'],
+					'<%= dir.stage %>/js/prototype-head.js': ['src/js/vendor/modernizr-2.8.3.js'],
+					'<%= dir.stage %>/js/prototype-global.js': ['src/js/vendor/jquery-1.11.2.js', 'src/js/main.js', 'src/js/components/*.js'],
 				}
 			}
 		},
@@ -84,39 +96,57 @@ module.exports = function(grunt) {
         		src: [ '*.php'],
         		dest: '<%= dir.stage %>/',
 		        options: {
-		        	includePath: 'includes'
+		        	includePath: 'includes',
+		        	//banner: '<%= banner %>',
 		        }
-      		}
+      		},
+      		prod: {
+        		cwd: 'page_templates',
+        		src: [ '*.php'],
+        		dest: '<%= dir.prod %>/',
+		        options: {
+		        	includePath: 'includes',		        	
+		        	flatten: true,
+		        }
+      		},
 		},
 
 		//watches files and runs tasks when files are saved
 		watch: {
-			scss: {
-				files: ['src/scss/**/*.scss'],
-				tasks: ['scsslint', 'compass:prod' /*,'copy:stage'*/]
+			css: {
+				files: ['src/scss/**'],
+				tasks: ['scsslint', 'compass:stage', 'compass:prod', 'copy:stage', 'copy:prod']
+			},
+			compass: {
+				files: ['**/*.scss'],
+				tasks: ['compass:stage', 'compass,prod']
 			},
 			js: {
 				files: ['src/js/**/*.js'],
-				tasks: ['concat:js', 'uglify:js' /*, 'copy:stage'*/]
+				tasks: ['concat:js', 'uglify:js', 'copy:stage', 'copy:prod']
 			},
 			html: {
-				files: ['page_templates/**', 'includes/**'],
+				files: ['page_templates/**', 'includes/**',],
 				tasks: ['includes']
+			},
+			options: {
+				 dateFormat: function(time) {
+			      grunt.log.writeln(time + 'ms at ' + (new Date()).toString());
+			      grunt.log.writeln('Waiting for more changes...');
+			    },
 			}
 		},
 
 		scsslint: {
 			options: {
-				bundleExec: true,
+				bundleExec: false,
 				colorizeOutput: true,
 				config: '.scss-lint.yml',
 				  // maxBuffer: 1024 * 1024,
 				  force: true
 			},
 			src: [
-				'scss/components/**/*.scss',
-				'scss/_typography.scss',
-				'scss/prototype-global.scss'
+				'scss/components/**/*.scss', 'scss/styles.scss'
 			]
 		},
 	});
@@ -131,6 +161,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-scss-lint');
 	grunt.loadNpmTasks('grunt-timer');
 	//tasks
-	grunt.registerTask('build', ['includes:stage', 'clean:prod', 'clean:stage', 'compass:stage', 'compass:prod', 'concat:js', 'uglify:js']);
+	grunt.registerTask('build', ['clean:prod', 'copy:prod', 'copy:stage', 'clean:stage', 'compass:stage', 'compass:prod', 'concat:js', 'uglify:js', 'includes']);
 	grunt.registerTask('default', ['watch']);
 };

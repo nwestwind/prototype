@@ -12,27 +12,70 @@ body {
 	font-size: $font-size-base;
 }
 
-header {
-	height: 100px;
+.page-header {
+	position:fixed;
+	height:80px;
+	z-index:100;
+	width:100%;
+	top:0;
+	.logo { 
+		position:absolute;
+		top:20px;
+		left:20px;
 
-	.logo {
 		h1 { 
-			text-indent: -999em;
+			// text-indent: -999em;
 			margin:0;
 		}
 	}
-	nav ul {
-		margin:0;
-		padding:0;
-		list-style:none;
+	nav {
+		display: block;		 
+		background:$gray-dark;
+		position:fixed;
+		right:0;
+		top:0;
+		bottom:0;
+		height:100%;
+		width:320px;
+		z-index:10;
+		padding:60px 0 0;
+		@include transition(all 500ms ease);
+		@include transform(translateX(100%));
+
+		a {
+			display: block;
+			margin:0;
+			padding:10px 15px;
+			color:$primary-blue;
+			text-transform: uppercase;
+			@include transition(all 500ms ease);
+			&:hover {
+				color:#FFF;
+				background:$primary-blue;
+			}
+			&.active {
+				color:#FFF;
+				background:$primary-dark-blue;
+			}
+		}
+		.menu-open & {
+			@include transform(translateX(0));
+		}
 	}
 
 }
 .sb-toggle {
-	width: 58px;
+	width: 48px;
  	cursor: pointer;
-	padding: 14px 14px 14px 21px;
-	position:relative;
+ 	background:#CCC;
+	padding: 11px 9px 8px 14px;
+	position:fixed;
+	top:15px;
+	right:15px;
+	border:1px solid #CCC;
+	@include box-shadow( 0 0 0 1px rgba(255,255,255,1) inset);
+	@include border-radius(4px);
+	z-index:1000;
 	.navicon-line {		
 		height: 4px;
 		@include border-radius(2px);
@@ -67,26 +110,47 @@ header {
 	}
 	.menu-open & .navicon-line {
 		width:100%;
-		background: $gray-darker;
+		background: $gray-lighter;
 	}
 }
-
-.sb-menu {
-
-}
+ 
 section {
-	background:$gray-dark;
-	margin-bottom:40px;
-	height:calc(100vh - 100px);
+	background:$gray-dark; 
+	// height:calc(100vh - 100px);
+	position: relative;
+	display:table;
+	width:100%;
+	overflow: hidden;
 	+ section {
-		margin-bottom:40px;
+		display:none;
 	}
-	> img {
-		max-width:100%;
-		position: fixed;
-
+	header {
+		display:table-cell;
+		vertical-align: middle;
+		width:100%;
+		position: absolute;
+		top:0;
+		right:0;
+		left:0;
+		z-index:2;
+		h2 {margin:0;}
 	}
 }
+.img-responsive {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+
+	> img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
 #hero {	
 	background:$gray-light;
 }  

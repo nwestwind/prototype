@@ -11,43 +11,44 @@
 		<script src="js/main-head.js"></script>
 	</head>
 	<body>
-		<header>
-			<a class="logo"><h1>The Westwind Project v0.1.0</h1></a>
+		<header class="page-header">
+			<a class="logo" href="#home"><h1>The Westwind Project v0.1.0</h1></a>
+			
+			<nav>
+				<!-- 
+				<a href="#home" data-target="home">Home</a>
+				<a href="#projects" data-target="projects">Projects</a>
+				<a href="#labs" data-target="labs">Labs</a>
+				<a href="#contact" data-target="contact">Contact</a> 
+				-->
+			</nav>
 			<div class="sb-toggle">
 				<div class="navicon-line"></div>
 				<div class="navicon-line"></div>
 				<div class="navicon-line"></div>
 			</div>
-			<nav>
-				<ul>
-					<li><a href="#home">Home</a></li>
-					<li><a href="#projects">Projects</a></li>
-					<li><a href="#labs">Labs</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</nav>
 		</header>
 		
 
 
-	<section id="hero">
-		<h2>Hero</h2>
-		<img src="img/hero1.jpg">
+	<section id="home" class="content">
+		<header><h2>Home</h2></header>
+		<div class="img-responsive"><img src="img/hero1.jpg"></div>
 	</section>
 
-	<section id="projects">
-		<h2>Projects</h2>
-		<img src="img/hero2.jpg">
+	<section id="projects" class="content">
+		<header><h2>Projects</h2></header>
+		<div class="img-responsive"><img src="img/hero2.jpg"></div>
 	</section>
 
-	<section id="labs">
-		<h2>Labs</h2>
-		<img src="img/hero2.jpg">
+	<section id="labs" class="content">
+		<header><h2>Labs</h2></header>
+		<div class="img-responsive"><img src="img/hero1.jpg"></div>
 	</section>
 
-	<section id="contact">
-		<h2>Contact</h2>
-		<img src="img/hero1.jpg">
+	<section id="contact" class="content">
+		<header><h2>Contact</h2></header>
+		<div class="img-responsive"><img src="img/hero2.jpg"></div>
 	</section>
 
 

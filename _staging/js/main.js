@@ -1,4 +1,4 @@
-/*! The Westwind Project Protoype 06-21-15 19:37:01 */
+/*! The Westwind Project Protoype 06-21-15 23:47:57 */
 
 /*!
  * jQuery JavaScript Library v1.11.2
@@ -10365,7 +10365,7 @@ return jQuery;
 
 			function parallaxScroll(){
 				var scrolledY = $(window).scrollTop();
-				$('section').css({'transform' : 'translateY('+ (scrolledY  / 2 )+ 'px)'});
+				// $('section').css({'transform' : 'translateY('+ (scrolledY  / 2 )+ 'px)'});
 			}
 		}
 
@@ -10374,7 +10374,52 @@ return jQuery;
 			$('.sb-menu').toggle();
 			$('html').toggleClass('menu-open');
 			return false;
-		})
+		});
+
+
+		getSections();
+
+		function getSections() { 	
+			$('section').each(function(){
+				var id = $(this).attr('id');
+
+				var windowHash  = window.location.hash;
+
+				$('nav').append('<a href="#'+id+'" class="">'+id+'</a>');
+			});
+
+			
+		}
+
+		
+
+		function showContent($navHash) {
+
+			if($('.content').attr('id') != $($navHash).text()); {
+
+				$('.content').hide();
+				$($navHash).show();
+			}
+			// console.log($navHash);
+		}
+
+		var $navLink = $('nav').find('a');
+
+		$navLink.each(function(index){
+			var $el = $(this),
+				$navHash = $el.attr('href');
+			
+				$el.click(function(){ 
+					$el.siblings().removeClass('active');
+					$el.addClass('active');
+					showContent($navHash);	
+
+					window.location.hash = $navHash;
+
+					return false;
+				});
+		});
+
     }
 }
 

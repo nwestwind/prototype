@@ -1,5 +1,6 @@
 * {
-	padding:0;
-	margin:0;
-	font-size:100%;
+	@include box-sizing(border-box);
 }
+
+$primary-blue: #3398CC;
+$primary-orange: #FA106A;

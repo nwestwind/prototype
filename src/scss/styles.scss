@@ -1,3 +1,5 @@
+@import "compass";
+
 @import "components/vars";
 
 body {
@@ -8,18 +10,19 @@ body {
 
 .logo {
 
-	h1 {
-		width:172px;
-		margin:0;
-		height:72px;
+	h1 { 
+		margin:0; 
 	}
 }
-.hero {
+header {
+	height: 100px;
+	
 	h1 {
-		color:red;
+		color:$primary-orange;
 		margin:0;
 	}
 }
-.test {
-
+a:link {
+	color:$primary-blue;
+	text-decoration: none;
 }

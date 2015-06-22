@@ -73,8 +73,8 @@ module.exports = function(grunt) {
 					separator: ';',
 				},
 				files: {
-					'<%= dir.stage %>/js/prototype-head.js': ['src/js/vendor/modernizr-2.8.3.js'],
-					'<%= dir.stage %>/js/prototype-global.js': ['src/js/vendor/jquery-1.11.2.js', 'src/js/main.js', 'src/js/components/*.js'],
+					'<%= dir.stage %>/js/main-head.js': ['src/js/vendor/modernizr-2.8.3.js'],
+					'<%= dir.stage %>/js/main.js': ['src/js/vendor/jquery-1.11.2.js', 'src/js/main.js', 'src/js/components/*.js'],
 				}
 			}
 		},
@@ -83,8 +83,8 @@ module.exports = function(grunt) {
 		uglify: {
 			js: {
 				files: {
-					'<%= dir.prod %>/js/prototype-head.js': ['<%= dir.stage %>/js/prototype-head.js'],
-					'<%= dir.prod %>/js/prototype-global.js': ['<%= dir.stage %>/js/prototype-global.js']
+					'<%= dir.prod %>/js/main-head.js': ['<%= dir.stage %>/js/main-head.js'],
+					'<%= dir.prod %>/js/main.js': ['<%= dir.stage %>/js/main.js']
 				}
 			}
 		},
@@ -134,6 +134,10 @@ module.exports = function(grunt) {
 			      grunt.log.writeln('It took ' + time + 'ms at ' + (new Date()).toString());
 			      grunt.log.writeln('Waiting for more changes...');
 			    },
+			},
+			copy: {
+				files: ['img/**'],
+				task:['copy']
 			}
 		},
 

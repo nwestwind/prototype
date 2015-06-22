@@ -4,7 +4,7 @@ scss_files: "src/scss/**.scss"
 
 # Active Config
 # command:
-# scss-lint --format=Config src/scss/styles.scss;
+# scss-lint --format=Config src/scss/styles.scss
 # ... will display linters that get caught.
 # Working backwards from that config helps specify what is needed
 # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md
@@ -53,7 +53,7 @@ linters:
     enabled: false
 
   Indentation:
-    enabled: false
+    enabled: true
 
   LeadingZero:
     enabled: false

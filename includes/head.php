@@ -8,16 +8,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link href="css/styles.css" rel="stylesheet">
-		<script src="js/global-head.js"></script>
+		<script src="js/main-head.js"></script>
 	</head>
 	<body>
 		<header>
 			<a class="logo"><h1>The Westwind Project v0.1.0</h1></a>
+			<div class="sb-toggle">
+				<div class="navicon-line"></div>
+				<div class="navicon-line"></div>
+				<div class="navicon-line"></div>
+			</div>
 			<nav>
 				<ul>
-					<li><a href="#">A</a></li>
-					<li><a href="#">B</a></li>
-					<li><a href="#">C</a></li>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#projects">Projects</a></li>
+					<li><a href="#labs">Labs</a></li>
+					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</nav>
 		</header>

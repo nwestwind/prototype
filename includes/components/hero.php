@@ -1,6 +1,4 @@
-	<div class="hero">
-		<h1>Hero</h1>
-		<video>
-			<source src="">
-		</video>
-	</div>
+	<section id="hero">
+		<h2>Hero</h2>
+		<img src="img/hero1.jpg">
+	</section>

@@ -49,8 +49,8 @@ var $twpPrototype = {
 
 			if($('.content').attr('id') != $($navHash).text()); {
 
-				$('.content').hide();
-				$($navHash).show();
+				$($navHash).siblings().removeClass('activate');
+				$($navHash).addClass('activate');
 			}
 			// console.log($navHash);
 		}

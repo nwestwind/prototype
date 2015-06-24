@@ -1,4 +1,4 @@
-/*! The Westwind Project Protoype 06-21-15 23:47:57 */
+/*! The Westwind Project Protoype 06-23-15 20:02:57 */
 
 /*!
  * jQuery JavaScript Library v1.11.2
@@ -10397,8 +10397,8 @@ return jQuery;
 
 			if($('.content').attr('id') != $($navHash).text()); {
 
-				$('.content').hide();
-				$($navHash).show();
+				$($navHash).siblings().removeClass('activate');
+				$($navHash).addClass('activate');
 			}
 			// console.log($navHash);
 		}
